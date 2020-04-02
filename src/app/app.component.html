@@ -1,6 +1,6 @@
 <!-- app.component.html -->
 
-<div style="text-align:center; margin-bottom: 20px;">
+<!-- <div style="text-align:center; margin-bottom: 20px;">
   <h1>
     Welcome to {{title}}!
   </h1>
@@ -11,4 +11,127 @@
     <igx-column field="Name" dataType="string"></igx-column>
     <igx-column field="Age" dataType="number"></igx-column>
   </igx-grid>
+</div> -->
+
+<div className="" >
+<igx-geographic-map #map
+    width="100%"
+    height="500px"
+    zoomable="true" >
+</igx-geographic-map>
 </div>
+
+<ng-template let-series="series" let-item="item" #template>
+    <div>
+        <span>
+            Country: {{item.country}}
+        </span>
+        <br/>
+        <span>
+          state: {{item.state}} 
+        </span>
+        <br/>
+        <span>
+          Confirmed: {{item.Confirmed}} 
+        </span>
+        <br/>
+        <span>
+          Deaths: {{item.Deaths}} 
+        </span>
+        <br/>
+        <span>
+          Recovered: {{item.Recovered}} 
+        </span>
+        <br/>
+            <span>
+              Active: {{item.Active}} 
+            </span>
+    </div>
+</ng-template>
+
+<!-- <section class="sample-content">
+  <article class="sample-column card-wrapper"> -->
+  
+    <div class="CardDetails">
+      <igx-card type="outlined" class="weather-card">
+        <!-- <igx-card-media height="196px">
+            <img [src]="'https://images.unsplash.com/photo-1518235506717-e1ed3306a89b?ixlib=rb-1.2.1&auto=format&fit=crop&w=640&q=50'">
+        </igx-card-media> -->
+      
+        <igx-card-header>
+            <h3 igxCardHeaderTitle>Total Confirmed</h3>
+            <h5 igxCardHeaderSubtitle>{{ WorldConfirmed }}</h5>
+        </igx-card-header>
+      
+        <igx-card-content>
+          <igx-list>
+            <!-- <igx-list-item isHeader="true">
+              Contacts
+            </igx-list-item> -->
+            <igx-list-item *ngFor="let Confirm of Confirmed">
+              <h4 igxListLineTitle>{{ Confirm.country }}</h4>
+              <p igxListLineSubTitle>{{ Confirm.Confirmed }}</p>
+            </igx-list-item>
+          </igx-list>
+        </igx-card-content>
+      
+      </igx-card>
+      
+    </div>
+    <div class="CardDetails">
+      <igx-card type="outlined" class="weather-card">
+        <!-- <igx-card-media height="196px">
+            <img [src]="'https://images.unsplash.com/photo-1518235506717-e1ed3306a89b?ixlib=rb-1.2.1&auto=format&fit=crop&w=640&q=50'">
+        </igx-card-media> -->
+      
+        <igx-card-header>
+            <h3 igxCardHeaderTitle>Total Deaths</h3>
+            <h5 igxCardHeaderSubtitle>{{ WorldDeaths }}</h5>
+        </igx-card-header>
+      
+        <igx-card-content>
+          <igx-list>
+            <!-- <igx-list-item isHeader="true">
+              Contacts
+            </igx-list-item> -->
+            <igx-list-item *ngFor="let Death of Deaths">
+              <h4 igxListLineTitle>{{ Death.country }}</h4>
+              <p igxListLineSubTitle>{{ Death.Deaths }}</p>
+            </igx-list-item>
+          </igx-list>
+        </igx-card-content>
+      
+      </igx-card>
+    </div>
+    <div class="CardDetails">
+      <igx-card type="outlined" class="weather-card">
+        <!-- <igx-card-media height="196px">
+            <img [src]="'https://images.unsplash.com/photo-1518235506717-e1ed3306a89b?ixlib=rb-1.2.1&auto=format&fit=crop&w=640&q=50'">
+        </igx-card-media> -->
+      
+        <igx-card-header>
+            <h3 igxCardHeaderTitle>Total Recovered</h3>
+            <h5 igxCardHeaderSubtitle>{{ WorldRecovered }}</h5>
+        </igx-card-header>
+      
+        <igx-card-content>
+          <igx-list>
+            <!-- <igx-list-item isHeader="true">
+              Contacts
+            </igx-list-item> -->
+            <igx-list-item *ngFor="let Recover of Recovered">
+              <h4 igxListLineTitle>{{ Recover.country }}</h4>
+              <p igxListLineSubTitle>{{ Recover.Recovered }}</p>
+            </igx-list-item>
+          </igx-list>
+        </igx-card-content>
+      
+      </igx-card>
+    </div>
+
+
+
+
+
+<!-- </article>
+</section> -->
