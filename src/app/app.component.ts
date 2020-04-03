@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, TemplateRef, ViewChild } from "@angular/core";
 import { IgxGeographicHighDensityScatterSeriesComponent } from "igniteui-angular-maps";
 import { IgxGeographicMapComponent } from 'igniteui-angular-maps';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent {
   @ViewChild("template", {static: false})
   public tooltip: TemplateRef<object>;
   
-  title = 'Covid19Dashboard';
+  title = 'Covid-19 Dashboard';
   localData = [
     { Name:'John', Age: 29 },
     { Name:'Alice', Age: 27 },
@@ -23,7 +24,8 @@ export class AppComponent {
 
   public Confirmed
   public Deaths
-  public Recovered
+  public Recovered;
+
   WorldConfirmed : number = 0;
   WorldDeaths : number = 0;
   WorldRecovered : number = 0;
@@ -37,7 +39,9 @@ export class AppComponent {
 
   public componentDidMount() {
       // fetching JSON data with geographic locations from public folder
-      fetch("assets/COVID-19/csse_covid_19_data/csse_covid_19_daily_reports/04-01-2020.csv")
+      let dte = new Date();
+      dte.setDate(dte.getDate() - 1);
+      fetch("assets/COVID-19/csse_covid_19_data/csse_covid_19_daily_reports/" +formatDate(dte, 'MM-dd-yyyy', 'en')+".csv")
           .then((response) => response.text())
           .then((data) => {this.onDataLoaded(data)
             this.onDataLoadedForList(data)
@@ -101,43 +105,45 @@ export class AppComponent {
     
     for (let i = 1; i < csvLines.length; i++) {
         const columns = csvLines[i].split(",");
-
-        if(columns[3] == 'US'){
-          USConfirmed += +columns[7]
-          USDeaths += +columns[8]
-          USRecovered += +columns[9]
-          this.WorldConfirmed += +columns[7]
-          this.WorldDeaths += +columns[8]
-          this.WorldRecovered += +columns[9]
-        }
-        else if(columns[3] == 'China'){
-          ChinaConfirmed += +columns[7]
-          ChinaDeaths += +columns[8]
-          ChinaRecovered += +columns[9]
-          this.WorldConfirmed += +columns[7]
-          this.WorldDeaths += +columns[8]
-          this.WorldRecovered += +columns[9]
-        }
-        else{
-          const Conf = {
+        if(columns.length > 1){
+          if(columns[3] == 'US'){
+            USConfirmed += +columns[7]
+            USDeaths += +columns[8]
+            USRecovered += +columns[9]
+            this.WorldConfirmed += +columns[7]
+            this.WorldDeaths += +columns[8]
+            this.WorldRecovered += +columns[9]
+          }
+          else if(columns[3] == 'China'){
+            ChinaConfirmed += +columns[7]
+            ChinaDeaths += +columns[8]
+            ChinaRecovered += +columns[9]
+            this.WorldConfirmed += +columns[7]
+            this.WorldDeaths += +columns[8]
+            this.WorldRecovered += +columns[9]
+          }
+          else{
+            const Conf = {
+              country: columns[3],
+              Confirmed : columns[7],
+          };
+          const Deat = {
             country: columns[3],
-            Confirmed : columns[7],
+            Deaths : columns[8],
         };
-        const Deat = {
+        const Recov = {
           country: columns[3],
-          Deaths : columns[8],
+          Recovered : columns[9],
       };
-      const Recov = {
-        country: columns[3],
-        Recovered : columns[9],
-    };
-        TotalConfirmed.push(Conf);
-        TotalDeaths.push(Deat);
-        TotalRecovered.push(Recov);
-        this.WorldConfirmed += +columns[7]
-        this.WorldDeaths += +columns[8]
-        this.WorldRecovered += +columns[9]
+          TotalConfirmed.push(Conf);
+          TotalDeaths.push(Deat);
+          TotalRecovered.push(Recov);
+          this.WorldConfirmed += +columns[7]
+          this.WorldDeaths += +columns[8]
+          this.WorldRecovered += +columns[9]
+          }
         }
+        
     }
     const USAC = {
       country: 'US',
@@ -147,8 +153,7 @@ export class AppComponent {
     country: 'China',
     Confirmed : ChinaConfirmed,
 };
-TotalConfirmed.push(USAC);
-TotalConfirmed.push(ChinaC);
+TotalConfirmed.unshift(USAC,ChinaC);
     this.Confirmed = TotalConfirmed;
 
     const USAD = {
@@ -159,8 +164,7 @@ TotalConfirmed.push(ChinaC);
     country: 'China',
     Deaths : ChinaDeaths,
 };
-TotalDeaths.push(USAD);
-TotalDeaths.push(ChinaD);
+TotalDeaths.unshift(USAD,ChinaD);
     this.Deaths = TotalDeaths;
 
     const USAR = {
@@ -171,8 +175,7 @@ TotalDeaths.push(ChinaD);
     country: 'China',
     Recovered : ChinaRecovered,
 };
-TotalRecovered.push(USAR);
-TotalRecovered.push(ChinaR);
+TotalRecovered.unshift(USAR,ChinaR);
     this.Recovered = TotalRecovered;
 }
 
