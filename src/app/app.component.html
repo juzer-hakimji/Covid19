@@ -26,7 +26,7 @@
       
         <igx-card-header>
             <h3 style="color:blue;" igxCardHeaderSubtitle>Total Confirmed</h3>
-            <h5 igxCardHeaderTitle>{{ WorldConfirmed }}</h5>
+            <h5 igxCardHeaderTitle>{{ WorldConfirmed | number: '1.0-0' }}</h5>
         </igx-card-header>
         <igx-divider></igx-divider>
         <igx-card-content>
@@ -36,7 +36,7 @@
             </igx-list-item> -->
             <igx-list-item *ngFor="let Confirm of Confirmed">
               <h4 igxListLineTitle>{{ Confirm.country }}</h4>
-              <p igxListLineSubTitle>{{ Confirm.Confirmed }}</p>
+              <p igxListLineSubTitle>{{ Confirm.Confirmed | number: '1.0-0' }}</p>
             </igx-list-item>
           </igx-list>
         </igx-card-content>
@@ -54,7 +54,7 @@
       
         <igx-card-header>
             <h3 style="color:red;" igxCardHeaderSubtitle>Total Deaths</h3>
-            <h5 igxCardHeaderTitle>{{ WorldDeaths }}</h5>
+            <h5 igxCardHeaderTitle>{{ WorldDeaths | number: '1.0-0' }}</h5>
         </igx-card-header>
         <igx-divider></igx-divider>
         <igx-card-content>
@@ -64,7 +64,7 @@
             </igx-list-item> -->
             <igx-list-item *ngFor="let Death of Deaths">
               <h4 igxListLineTitle>{{ Death.country }}</h4>
-              <p igxListLineSubTitle>{{ Death.Deaths }}</p>
+              <p igxListLineSubTitle>{{ Death.Deaths | number: '1.0-0' }}</p>
             </igx-list-item>
           </igx-list>
         </igx-card-content>
@@ -80,7 +80,7 @@
       
         <igx-card-header>
             <h3 style="color:green;" igxCardHeaderSubtitle>Total Recovered</h3>
-            <h5 igxCardHeaderTitle>{{ WorldRecovered }}</h5>
+            <h5 igxCardHeaderTitle>{{ WorldRecovered | number: '1.0-0' }}</h5>
         </igx-card-header>
         <igx-divider></igx-divider>
         <igx-card-content>
@@ -90,7 +90,7 @@
             </igx-list-item> -->
             <igx-list-item *ngFor="let Recover of Recovered">
               <h4 igxListLineTitle>{{ Recover.country }}</h4>
-              <p igxListLineSubTitle>{{ Recover.Recovered }}</p>
+              <p igxListLineSubTitle>{{ Recover.Recovered | number: '1.0-0' }}</p>
             </igx-list-item>
           </igx-list>
         </igx-card-content>
