@@ -12,7 +12,3 @@
 
 @include igx-core();
 @include igx-theme($default-palette);
-
-body{
-    background-color: lightgrey;
-}

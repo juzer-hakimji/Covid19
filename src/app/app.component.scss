@@ -159,8 +159,76 @@
 }
 
 .CardDetails{
-    width: 33%;
-    height: 200px;
-    overflow: scroll;
-    display: inline-block;
+    width: 100% !important;
+    height: 11rem;
+    overflow-y: scroll;
+    // display: inline-block;
 }
+
+.lightblue{
+    background-color: lightblue;
+}
+
+.pink{
+    background-color: pink;
+}
+
+.lightgreen{
+    background-color: lightgreen;
+}
+
+@media only screen and (max-width: 786px) {
+    .Carddiv{
+        width:100%;
+        
+    }
+    
+    .Graphdiv{
+        width:100% !important;
+        background-color: darkslategray;
+    }
+
+    .Header{
+        line-height: 5rem;
+        background-color: brown;
+        text-align:center !important; 
+        font-size: 6vw;
+        // margin-bottom: 20px !important;
+    }
+}
+
+@media only screen and (min-width: 786px) {
+    .Carddiv{
+        width:33%;
+        float: left;
+    }
+    
+    .Graphdiv{
+        width:67% !important;
+        float: right !important;
+        background-color: darkslategray;
+    }
+
+    .Header{
+        line-height: 5rem;
+        background-color: brown;
+        text-align:center !important; 
+        font-size: 4vw;
+        // margin-bottom: 20px !important;
+    }
+}
+
+.left{
+    display: block;
+    float:left;
+    width: 50%;
+    font-weight: bolder;
+  }
+  
+  .right{
+    display: block;
+    float:right;
+    width: 50%;
+    text-align: right;
+    font-weight: bolder;
+  }
